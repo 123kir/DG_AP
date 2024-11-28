@@ -1,4 +1,5 @@
 ﻿using AirPort_PRO_NuGet_Logger.AirPortManager;
+using AirPort_PRO_NuGet_Logger.DB;
 using DataGridAirPort.Storage.Memory;
 using Serilog;
 using Serilog.Extensions.Logging;
@@ -21,14 +22,14 @@ namespace AirPort_PRO_NuGet_Logger
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var serilogLogger = new LoggerConfiguration()
-                .MinimumLevel.Verbose()
-                .WriteTo.Seq("http://localhost:5341", apiKey: "")
-                .CreateLogger();
+            //var serilogLogger = new LoggerConfiguration()
+            //    .MinimumLevel.Verbose()
+            //    .WriteTo.Seq("http://localhost:5341", apiKey: "")
+            //    .CreateLogger();
 
             var logger = new SerilogLoggerFactory(serilogLogger).CreateLogger("DataGrid");
 
-            var storage = new MemoryAirPlaneStorage();
+            var storage = new DataBasePlaneStorage();
             var manager = new PlaneManager_cs(storage, logger);
 
             Application.Run(new Form1(manager));
