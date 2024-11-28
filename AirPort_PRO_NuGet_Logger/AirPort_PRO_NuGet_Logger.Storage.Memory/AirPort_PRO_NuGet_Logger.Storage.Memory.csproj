@@ -1,0 +1,29 @@
+﻿<Project Sdk=" Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<BuildPackage>true</BuildPackage>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<PackageLicenseExpression>MIT OR Apache-2.0</PackageLicenseExpression>
+		<PackageId>PKGH.Kir.AirPort_PRO_NuGet_Logger.Storage.Memory</PackageId>
+		<Title>Plane Reestre Memory Storage</Title>
+		<Version>1.0.1</Version>
+		<Authors>Kirill</Authors>
+		<Company>PKGH</Company>
+		<Description>package for studying.</Description>
+		<Product>planeReestre</Product>
+		<TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AirPort_PRO_NuGet_Logger.Contracts\AirPort_PRO_NuGet_Logger.Contracts.csproj" >
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>AirPort_PRO_NuGet_Logger.Contracts.dll</IncludeAssets>
+		</ProjectReference>
+	</ItemGroup>
+
+
+	<Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
+		<ItemGroup>
+			<BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+		</ItemGroup>
+	</Target>
+</Project>
